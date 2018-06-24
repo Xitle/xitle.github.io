@@ -61,7 +61,12 @@ function addUser() {
     var usersRef = firebase.database().ref().child("users");
     var fname = $('#fname').val();
     var lname = $('#lname').val();
-
+    $.ajax({
+        url: 'fragments/addLoader.html',
+        success: function (res) {
+            $('#add_loader').html(res);
+        }
+    });
     usersRef.once('value', function (snapshot) {
         if (snapshot.val() === null) {
             var userID = 1;
@@ -77,26 +82,32 @@ function addUser() {
         }
     });
 
-    swal('Success', 'Successfully added.', 'success').then(function () {
-        location.reload();
-    });
+
 }
 
 //Login to firebase authentication
 function login() {
     var email = $('input[name="email"].sign_in_field')[0].value;
     var password = $('input[name="password"].sign_in_field')[0].value;
-
+    $.ajax({
+        url: 'fragments/signInLoader.html',
+        success: function (res) {
+            $('#sign_in_loader').html(res);
+        }
+    });
     firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
         swal('Success', 'You are now logged in.', 'success').then(function () {
             $('.ui.modal').modal('hide');
+            $('#sign_in_loader').html('');
         });
     }).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
-        swal('Error', errorMessage, 'error');
+        swal('Error', errorMessage, 'error').then(function () {
+            $('#sign_in_loader').html('');
+        });
     });
 
 }
@@ -106,16 +117,25 @@ function signUp() {
     var password = $('input[name="password"].sign_up_field')[0].value;
     var cpassword = $('input[name="cpassword"].sign_up_field')[0].value;
     if (password === cpassword) {
+        $.ajax({
+            url: 'fragments/signUpLoader.html',
+            success: function (res) {
+                $('#sign_up_loader').html(res);
+            }
+        });
         firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
+            $('#sign_up_loader').html('');
             swal('Success', 'You are now registered.', 'success');
         }).catch(function (error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
             // ...
+            $('#sign_up_loader').html('');
             swal('Error', errorMessage, 'error');
         });
     } else {
+        $('#sign_up_loader').html('');
         swal('Error', 'Password doesn\'t match.', 'error');
     }
 
@@ -144,7 +164,19 @@ function writeUserData(fname, lname, userID) {
         userID: userID,
         firstname: fname,
         lastname: lname
+    }).then(function () {
+        swal('Success', 'Successfully added.', 'success').then(function () {
+            $('#add_loader').html('');
+            location.reload();
+        });
+    }).catch(function (error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+        swal('Error', errorMessage, 'error');
     });
+
+
 }
 
 
