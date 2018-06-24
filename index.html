@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- DataTables -->
+    <!-- <link rel="stylesheet" type="text/css" href="datatables/datatables.css" />
+    <script type="text/javascript" src="datatables/datatables.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/se/dt-1.10.18/fh-3.1.4/r-2.2.2/datatables.min.css"
+    />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.18/fh-3.1.4/r-2.2.2/datatables.min.js"></script>
+
+    <!-- Semantic UI -->
+    <!-- <link rel="stylesheet" type="text/css" href="semantic/semantic.min.css">
+    <script src="semantic/semantic.min.js"></script> -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.2/semantic.min.js"></script>
+
+    <!-- Alertify -->
+    <script src="js/alertify.min.js"></script>
+    <link rel="stylesheet" href="css/alertify.min.css">
+    <link rel="stylesheet" href="css/themes/semantic.min.css">
+
+    <!-- firebase -->
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+</head>
+
+<body>
+    <div id="navigation"></div>
+    <br>
+    <br>
+    <br>
+    <!-- <img class="ui wireframe image" src="images/wireframe/paragraph.png"> -->
+    <div class="ui tiny modal" id="add_user_modal">
+        <div class="header">Add User</div>
+        <div class="content">
+            <div class="ui grid one column middle aligned centered aligned">
+                <div class="column">
+                    <form class="ui form">
+                        <div class="field">
+                            <label>First Name</label>
+                            <input id="fname" type="text" name="first-name" placeholder="First Name">
+                        </div>
+                        <div class="field">
+                            <label>Last Name</label>
+                            <input id="lname" type="text" name="last-name" placeholder="Last Name">
+                        </div>
+                        <div class="field">
+                            <div class="ui checkbox">
+                                <input type="checkbox" tabindex="0">
+                                <label>I agree to the Terms and Conditions</label>
+                            </div>
+                        </div>
+                        <button id="add_user_btn" class="ui button" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui tiny modal" id="sign_in_modal">
+        <div class="header">Sign-in</div>
+        <div class="content">
+            <div class="ui grid one column middle aligned centered aligned">
+                <div class="column">
+                    <form class="ui form">
+                        <div class="field">
+                            <label>Email</label>
+                            <input class="sign_in_field" type="email" name="email" placeholder="Email">
+                        </div>
+                        <div class="field">
+                            <label>Password</label>
+                            <input class="sign_in_field" type="password" name="password" placeholder="Password">
+                        </div>
+                        <button id="sign_in_btn" class="ui button" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui tiny modal" id="sign_up_modal">
+        <div class="header">Sign-up</div>
+        <div class="content">
+            <div class="ui grid one column middle aligned centered aligned">
+                <div class="column">
+                    <form class="ui form">
+                        <div class="field">
+                            <label>Email</label>
+                            <input class="sign_up_field" type="email" name="email" placeholder="Email">
+                        </div>
+                        <div class="field">
+                            <label>Password</label>
+                            <input class="sign_up_field" type="password" name="password" placeholder="Password">
+                        </div>
+                        <div class="field">
+                            <label>Confirm Password</label>
+                            <input class="sign_up_field" type="password" name="cpassword" placeholder="Password">
+                        </div>
+                        <button id="sign_up_btn" class="ui button" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase.js"></script>
+
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-functions.js"></script>
+
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAG54yFwtp1zcvoCleol8tlwYjrVH8h-js",
+            authDomain: "xitle-web.firebaseapp.com",
+            databaseURL: "https://xitle-web.firebaseio.com",
+            projectId: "xitle-web",
+            storageBucket: "",
+            messagingSenderId: "348902397841"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
