@@ -92,20 +92,27 @@
         <div class="content">
             <div class="ui grid one column middle aligned centered aligned">
                 <div class="column">
-                    <form class="ui form">
+                    <form class="ui form sign_up">
                         <div class="field">
                             <label>Email</label>
-                            <input class="sign_up_field" type="email" name="email" placeholder="Email">
+                            <input class="sign_up_field" type="text" name="email" placeholder="Email">
                         </div>
                         <div class="field">
                             <label>Password</label>
-                            <input class="sign_up_field" type="password" name="password" placeholder="Password">
+                            <input id="sign_up_pass" class="sign_up_field" type="password" name="password" placeholder="Password">
                         </div>
                         <div class="field">
                             <label>Confirm Password</label>
                             <input class="sign_up_field" type="password" name="cpassword" placeholder="Password">
                         </div>
+                        <div class="inline field">
+                            <div class="ui checkbox">
+                                <input id="terms" type="checkbox" name="terms" tabindex="0" class="hidden">
+                                <label for="terms">I agree to the terms and conditions</label>
+                            </div>
+                        </div>
                         <button id="sign_up_btn" class="ui button" type="submit">Submit</button>
+                        <div class="ui error message"></div>
                     </form>
                 </div>
             </div>
