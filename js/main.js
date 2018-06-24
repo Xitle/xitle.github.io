@@ -40,7 +40,7 @@ $(document).ready(function () {
                             var errorCode = error.code;
                             var errorMessage = error.message;
                             // ...
-                            alertify.alert(errorMessage);
+                            swal('Error', errorMessage, 'error');
                         });
                     }
                 });
@@ -126,7 +126,7 @@ function addUser() {
         }
     });
 
-    alertify.alert('Success', 'Your information has been submitted.', function () {
+    swal('Success', 'You are now logged in.', 'success').then(function () {
         location.reload();
     });
 }
@@ -137,7 +137,7 @@ function login() {
     var password = $('input[name="password"].sign_in_field')[0].value;
 
     firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
-        alertify.alert('Success', 'You are now logged in.', function () {
+        swal('Success', 'You are now logged in.', 'success').then(function () {
             location.reload();
         });
     }).catch(function (error) {
@@ -145,7 +145,7 @@ function login() {
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
-        alertify.alert(errorMessage);
+        swal('Error', errorMessage, 'error');
     });
 
 }
@@ -156,7 +156,7 @@ function signUp() {
     var cpassword = $('input[name="cpassword"].sign_up_field')[0].value;
     if (password === cpassword) {
         firebase.auth().createUserWithEmailAndPassword(email, password).then(function () {
-            alertify.alert('Success', 'You are registered.', function () {
+            swal('Success', 'You are now logged in.', 'success').then(function () {
                 location.reload();
             });
         }).catch(function (error) {
@@ -164,10 +164,10 @@ function signUp() {
             var errorCode = error.code;
             var errorMessage = error.message;
             // ...
-            alertify.alert(errorMessage);
+            swal('Error', errorMessage, 'error');
         });
     } else {
-        alertify.alert('Password doesn\'t match.');
+        swal('Error', 'Password doesn\'t match.', 'error');
     }
 
 
@@ -176,7 +176,7 @@ function signUp() {
 function signOut() {
     firebase.auth().signOut().then(function () {
         // Sign-out successful.
-        alertify.alert('Success', 'You are logged out.', function () {
+        swal('Success', 'You are now logged in.', 'success').then(function () {
             location.reload();
         });
     }).catch(function (error) {
@@ -184,7 +184,7 @@ function signOut() {
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
-        alertify.alert(errorMessage);
+        swal('Error', errorMessage, 'error');
     });
 }
 
